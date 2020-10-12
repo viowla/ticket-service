@@ -28,10 +28,7 @@ public class TicketController {
         List<Ticket> tickets = Arrays.asList(
                 new Ticket("1",12.0),
                 new Ticket("2",10.0),
-                new Ticket("3",15.0),
-                new Ticket("4",12.0),
-                new Ticket("5",10.0),
-                new Ticket("6",15.0)
+                new Ticket("3",15.0)
         );
         return tickets;
     }
