@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,11 +26,10 @@ public class TicketController {
 
     @GetMapping("")
     public List<Ticket> getAllTickets(){
-        List<Ticket> tickets = Arrays.asList(
-                new Ticket("1",12.0),
-                new Ticket("2",10.0),
-                new Ticket("3",15.0)
-        );
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket("1", 10.0));
+        tickets.add(new Ticket("2", 12.0));
+        tickets.add(new Ticket("3", 15.0));
         return tickets;
     }
 }
