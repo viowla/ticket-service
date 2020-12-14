@@ -1,5 +1,7 @@
 package kz.iitu.ticketservice;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -7,27 +9,25 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tickets")
 @CrossOrigin("*")
 public class TicketController {
 
-    @GetMapping("/{userId}")
-    public UserTicket getTicketsByUserId(@PathVariable("userId") String userId){
-        List<Ticket> userTicketList =  Arrays.asList(
-                new Ticket("1", 10.0),
-                new Ticket("2", 15.0));
+    private TicketRepository ticketRepository;
+    private TicketService ticketService;
 
-        UserTicket userTicket = new UserTicket(userTicketList);
 
-        return userTicket;
+    @GetMapping("/ticket/all")
+    public ResponseEntity<List<Ticket>> getAllMovies(){
+        return new ResponseEntity<>(ticketRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("")
-    public List<Ticket> getAllTickets(){
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(new Ticket("1", 10.0));
-        tickets.add(new Ticket("2", 12.0));
-        tickets.add(new Ticket("3", 15.0));
-        return tickets;
+    @GetMapping("/ticket/{id}")
+    public ResponseEntity<List<Ticket>> getMovie(@PathVariable String id) {
+        return new ResponseEntity<>(ticketService.searchTickets(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/ticket")
+    public ResponseEntity<Ticket> createMovie(@RequestBody Ticket movie) {
+        return new ResponseEntity<>(ticketService.addTicket(movie), HttpStatus.CREATED);
     }
 }
