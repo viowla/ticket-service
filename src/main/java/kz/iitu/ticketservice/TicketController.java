@@ -17,17 +17,17 @@ public class TicketController {
 
 
     @GetMapping("/ticket/all")
-    public ResponseEntity<List<Ticket>> getAllMovies(){
+    public ResponseEntity<List<Ticket>> getAllTickets(){
         return new ResponseEntity<>(ticketRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/ticket/{id}")
-    public ResponseEntity<List<Ticket>> getMovie(@PathVariable String id) {
+    public ResponseEntity<List<Ticket>> getTicketById(@PathVariable String id) {
         return new ResponseEntity<>(ticketService.searchTickets(id), HttpStatus.OK);
     }
 
     @PostMapping("/ticket")
-    public ResponseEntity<Ticket> createMovie(@RequestBody Ticket movie) {
+    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket movie) {
         return new ResponseEntity<>(ticketService.addTicket(movie), HttpStatus.CREATED);
     }
 }
